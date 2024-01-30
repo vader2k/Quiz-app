@@ -9,6 +9,29 @@ import { useNavigate } from "react-router-dom";
 
 const Quiz = () => {
 
+  const [toggle, settoggle] = useState(true);
+  const [theme, setTheme] = useState(null);
+
+  useEffect(() => {
+    if(window.matchMedia("(prefers-color-scheme: dark)").matches){
+      setTheme('dark');
+    }else{
+      setTheme('light');
+    }
+  },[])
+
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else{
+      document.documentElement.classList.remove('dark');
+    }
+  },[theme])
+
+  const handleThemeSwitched = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  }
+
   const navigate = useNavigate();
 //a function to check if timer has gotten to zero
   const handleTimerEnd = () => {
@@ -75,8 +98,10 @@ const Quiz = () => {
             >Welcome to the Quiz <span className="font-Raleway blue_gradient">{username}</span>
           </h1>
 
-          <div>
-            <FaMoon />
+          <div onClick={()=> settoggle((prev)=>(!prev))}>
+            {
+              toggle ? <FaMoon onClick={handleThemeSwitched}/> : <FaSun onClick={handleThemeSwitched}/>
+            }
           </div>
         </div>
 
