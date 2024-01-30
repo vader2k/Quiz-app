@@ -51,6 +51,16 @@ const Quiz = () => {
   useEffect(()=> {
     setQuestion(quiz[questionNumber - 1])
   },[questionNumber])
+
+  useEffect(() => {
+    if (questionNumber > numberOfQuestions) {
+      // If all questions are answered, navigate to the result page
+      navigate('/result');
+    } else {
+      setQuestion(quiz[questionNumber - 1]);
+    }
+  }, [quiz, questionNumber, navigate, numberOfQuestions]);
+
   
   return (
     <div className="flex items-start justify-between">
