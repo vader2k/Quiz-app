@@ -6,9 +6,13 @@ const Login = () => {
 
   const navigate = useNavigate()
 
-  const [username, setUsername] = useState("")
+  const [ username, setUsername ] = useState("")
+  const [ invalidName, setInvalidName ] = useState(false)
 
   const startQuiz = () => {
+    if (username.length === 0 ) {
+      setInvalidName(true)
+    }
     navigate('/quiz')
   }
 
@@ -35,6 +39,12 @@ const Login = () => {
           className='h-[40px] min-w-[400px] border border-blue-100 px-5 text-[0.9rem] focus:border-blue-500 outline-none'
           onChange={(e)=>{setUsername(e.target.value)}}
         />
+
+        {invalidName && (
+          <div>
+            <p>Please enter a valid username</p>
+          </div>
+        )}
 
         <button 
           className='start-btn p-3 border-blue-500 border max-w-[150px] m-auto text-[0.9rem] font-medium hover:bg-blue-500 hover:text-white'
