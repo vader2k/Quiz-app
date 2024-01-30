@@ -22,7 +22,7 @@ const Results = () => {
       }
       {
         score <=14 && (
-          <div>
+          <div className='text-red-400 text-[1.3rem]'>
             Buddy, go back to the drawing board for real, 
             youre a waste of space atp! <br/>
             Fuck!!!
