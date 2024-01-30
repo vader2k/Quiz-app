@@ -1,6 +1,7 @@
 import picture from '../assets/quiz-bg.jpg'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { FaQuestionCircle } from "react-icons/fa";
 
 const Login = () => {
 
@@ -8,6 +9,7 @@ const Login = () => {
 
   const [ username, setUsername ] = useState("")
   const [ invalidName, setInvalidName ] = useState(false)
+  const [ instructions, setInstructions ] = useState(false)
 
   const startQuiz = (e) => {
     e.preventDefault();
@@ -21,8 +23,12 @@ const Login = () => {
     }
   }
 
+  const handleInstructions = () => {
+    setInstructions((prev) => (!prev))
+  }
+
   return (
-    <div className='flex flex-col text-center items-center gap-8'>
+    <div className='flex flex-col text-center items-center gap-8 relative'>
       <img 
         className='h-[400px]' 
         src={picture} />
@@ -58,8 +64,27 @@ const Login = () => {
             Start Quiz 🥇
         </button>
       </form>
-
         
+        {/* question and instruction menu */}
+        <div 
+          className='absolute right-0 bottom-[-100px]'>
+            <FaQuestionCircle 
+              className='text-blue-300 text-[1.8rem] cursor-pointer'
+              onClick={handleInstructions}/>
+        </div>
+
+        {
+          instructions && (
+            <div className='absolute bottom-0 right-0 h-[250px] bg-blue-100 w-[300px] z-10 p-5'>
+              <div className='text-justify text-[0.85rem] flex flex-col gap-3'>
+                <h1 className='font-bold font-Roboto'>Welcome to simple react quiz</h1>
+                <p>There are 30 questions in total, each of them having four options for you to choose from, and a timer for each question</p>
+                <p>Once the timer runs out, your quiz will automatically be submitted regardless of your progress</p>
+                <p className='text-yellow-500 font-bold'>Goodluck Wizards 🪄</p>
+              </div>
+            </div>
+          )
+        }
     </div>
   )
 }
