@@ -1,9 +1,16 @@
 import high from '../assets/high.jpg'
 import low from '../assets/low.jpg'
+import { useNavigate } from 'react-router-dom'
 
 const Results = () => {
+  const navigate = useNavigate()
   const username = localStorage.getItem('username')
   const score = localStorage.getItem('score')
+
+  const retakeQuiz = () => {
+    navigate('/')
+    localStorage.clear()
+  }
   return (
     <div className='flex flex-col gap-10 text-center'>
       <img 
@@ -29,6 +36,11 @@ const Results = () => {
           </div>
         )
       }
+      <button 
+        onClick={retakeQuiz}
+        className='w-fit p-3 m-auto bg-blue-400 text-white'
+        > Retake Quiz
+      </button>
     </div>
   )
 }
