@@ -9,11 +9,13 @@ const Login = () => {
   const [ username, setUsername ] = useState("")
   const [ invalidName, setInvalidName ] = useState(false)
 
-  const startQuiz = () => {
+  const startQuiz = (e) => {
+    e.preventDefault();
     if (username.length === 0 ) {
       setInvalidName(true)
+    } else {
+      navigate('/quiz')
     }
-    navigate('/quiz')
   }
 
   return (
@@ -48,7 +50,7 @@ const Login = () => {
 
         <button 
           className='start-btn p-3 border-blue-500 border max-w-[150px] m-auto text-[0.9rem] font-medium hover:bg-blue-500 hover:text-white'
-          onClick={startQuiz}
+          onClick={(e)=>startQuiz(e)}
           >
             Start Quiz 🥇
         </button>
