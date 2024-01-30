@@ -14,6 +14,9 @@ const Login = () => {
     if (username.length === 0 ) {
       setInvalidName(true)
     } else {
+      // Store username in local storage
+      localStorage.setItem('username', username);
+      // Navigate to the '/quiz' page
       navigate('/quiz')
     }
   }
@@ -44,7 +47,7 @@ const Login = () => {
 
         {invalidName && (
           <div>
-            <p>Please enter a valid username</p>
+            <p className='text-[0.85rem] text-red-500'>Please enter a valid username</p>
           </div>
         )}
 
