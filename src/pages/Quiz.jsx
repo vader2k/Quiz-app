@@ -4,7 +4,7 @@ import { FaSun } from "react-icons/fa6";
 import { quiz } from "..";
 import Timer from "../component/Timer";
 import bg from '../assets/jack.jpg'
-
+import { GiRun } from "react-icons/gi";
 
 const Quiz = () => {
   // getting my username back from local storage
@@ -12,7 +12,7 @@ const Quiz = () => {
   //getting the question length and current question
   const numberOfQuestions = quiz.length
   const [ score, setScore ] = useState(0)
-  const [ stopTimer, setStopTimer ] = useState(false)
+  const [ exit, setExit ] = useState(false)
   const [ questionNumber, setQuestionNumber ] = useState(1)
   const [ question, setQuestion ] = useState(null)
   const [ selectedAnswer, setSelectedAnswer ] = useState(null)
@@ -21,8 +21,11 @@ const Quiz = () => {
     setSelectedAnswer(a)
      if (a.correct === true) {
       setScore(score + 1)
+      setQuestionNumber(prev=>prev+1)
+      setSelectedAnswer(null)
      }
   }
+
   useEffect(()=> {
     setQuestion(quiz[questionNumber - 1])
   },[quiz, questionNumber])
@@ -69,6 +72,14 @@ const Quiz = () => {
             ))}
           </div>
         </div>
+
+        <button
+          onClick={()=>setExit(true)}
+          className="flex items-center justify-center gap-2 text-red-500 border-red-500 border hover:bg-red-500 hover:text-white p-3 w-fit m-auto text-[0.85rem] font-medium"
+        >
+          <p>Give Up!</p>
+          <GiRun/>
+        </button>
       </div>
     </div>
   )

@@ -48,7 +48,7 @@ export const quiz = [
         question: "What is React used for?",
         answers: [
             {
-                options: "JServer-side scripting",
+                options: "Server-side scripting",
                 correct: false,
             },
             {
