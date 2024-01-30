@@ -1,8 +1,9 @@
 
 
 const Results = () => {
+  const score = localStorage.getItem('score')
   return (
-    <div>Results</div>
+    <div>{score}</div>
   )
 }
 

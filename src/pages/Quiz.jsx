@@ -5,14 +5,22 @@ import { quiz } from "..";
 import Timer from "../component/Timer";
 import bg from '../assets/jack.jpg'
 import { GiRun } from "react-icons/gi";
+import { useNavigate } from "react-router-dom";
 
 const Quiz = () => {
+
+  const navigate = useNavigate();
+//a function to check if timer has gotten to zero
+  const handleTimerEnd = () => {
+    // Handle timer end, navigate to the score page, etc.
+    navigate('/result');
+  };
+
   // getting my username back from local storage
   const username = localStorage.getItem('username')
   //getting the question length and current question
   const numberOfQuestions = quiz.length
   const [ score, setScore ] = useState(0)
-  const [ exit, setExit ] = useState(false)
   const [ questionNumber, setQuestionNumber ] = useState(1)
   const [ question, setQuestion ] = useState(null)
   const [ selectedAnswer, setSelectedAnswer ] = useState(null)
@@ -21,14 +29,28 @@ const Quiz = () => {
     setSelectedAnswer(a)
      if (a.correct === true) {
       setScore(score + 1)
-      setQuestionNumber(prev=>prev+1)
       setSelectedAnswer(null)
+
+      //storing my score in my localstorage
+      localStorage.setItem('score', score + 1);
+      setTimeout(()=> {
+        setQuestionNumber(prev=>prev+1)
+      },3000)
+     } else{
+      setSelectedAnswer(null)
+      setTimeout(()=> {
+        setQuestionNumber(prev=>prev+1)
+      },3000)
      }
+  }
+
+  const handleExit = () => {
+    navigate('/result')
   }
 
   useEffect(()=> {
     setQuestion(quiz[questionNumber - 1])
-  },[quiz, questionNumber])
+  },[questionNumber])
   
   return (
     <div className="flex items-start justify-between">
@@ -50,7 +72,7 @@ const Quiz = () => {
 
         <div className="flex items-center justify-between">
           <div className="font-medium">{questionNumber} of {numberOfQuestions}</div>
-          <Timer />
+          <Timer  questionNumber={questionNumber} onTimerEnd={handleTimerEnd}/>
         </div>
         <div>
           <h1 className="font-bold">SCORE 👍: <span>{score}</span></h1>
@@ -63,7 +85,7 @@ const Quiz = () => {
           <div className="">
             {question?.answers.map((a, index)=>(
               <div
-                className={`${selectedAnswer === a ? 'bg-blue-300': ''} border p-5 font-Roboto text-[0.85rem] cursor-pointer mt-3`}
+                className={`${selectedAnswer === a ? 'bg-blue-300': ''} border p-5 font-Roboto text-[0.85rem] cursor-pointer mt-3 hover:bg-blue-300`}
                 key={index}
                 onClick={()=>handleAnswer(a)}
                 >
@@ -74,7 +96,7 @@ const Quiz = () => {
         </div>
 
         <button
-          onClick={()=>setExit(true)}
+          onClick={handleExit}
           className="flex items-center justify-center gap-2 text-red-500 border-red-500 border hover:bg-red-500 hover:text-white p-3 w-fit m-auto text-[0.85rem] font-medium"
         >
           <p>Give Up!</p>
