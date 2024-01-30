@@ -659,26 +659,4 @@ export const Questions = [
             },
         ]
     },
-    {
-        id:1,
-        question: "What is the purpose of componentDidMount() in React?",
-        answers: [
-            {
-                options: "It is called after the component is rendered.",
-                correct: true,
-            },
-            {
-                options: "It is called before the component is rendered.",
-                correct: false,
-            },
-            {
-                options: "It is called during the rendering process.",
-                correct: false,
-            },
-            {
-                options: "It is called when the component is about to unmount.",
-                correct: false,
-            },
-        ]
-    },
 ]
