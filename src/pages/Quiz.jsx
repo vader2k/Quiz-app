@@ -17,6 +17,12 @@ const Quiz = () => {
   const [ question, setQuestion ] = useState(null)
   const [ selectedAnswer, setSelectedAnswer ] = useState(null)
 
+  const handleAnswer =(a)=> {
+    setSelectedAnswer(a)
+     if (a.correct === true) {
+      setScore(score + 1)
+     }
+  }
   useEffect(()=> {
     setQuestion(quiz[questionNumber - 1])
   },[quiz, questionNumber])
@@ -54,8 +60,9 @@ const Quiz = () => {
           <div className="">
             {question?.answers.map((a, index)=>(
               <div
-                className="border p-5 font-Roboto text-[0.85rem] cursor-pointer mt-3 hover:bg-gray-200" 
+                className={`${selectedAnswer === a ? 'bg-blue-300': ''} border p-5 font-Roboto text-[0.85rem] cursor-pointer mt-3`}
                 key={index}
+                onClick={()=>handleAnswer(a)}
                 >
                 {a.options}
               </div>
