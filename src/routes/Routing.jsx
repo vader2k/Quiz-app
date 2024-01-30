@@ -9,7 +9,7 @@ const Routing = () => {
   return (
     <div>
         <Routes>
-            <Route index element={<Login/>}/>
+            <Route path="/" element={<Login/>}/>
             <Route path="/quiz" element={<Quiz/>}/>
             <Route path="/result" index element={<Results/>}/>
         </Routes>

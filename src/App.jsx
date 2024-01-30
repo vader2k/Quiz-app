@@ -1,12 +1,10 @@
-import { useState, useEffect } from "react"
-
-import Login from './pages/Login'
-import Quiz from './pages/Quiz'
-import Results from './pages/Results'
+import Routing from "./routes/Routing"
 
 const App = () => {
   return (
-    <div className="max-w-7xl">App</div>
+    <div className="max-w-7xl m-auto flex items-center justify-center h-[100vh] font-Raleway">
+      <Routing />
+    </div>
   )
 }
 
