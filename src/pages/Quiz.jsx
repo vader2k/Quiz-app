@@ -107,7 +107,12 @@ const Quiz = () => {
 
         <div className="flex items-center justify-between">
           <div className="font-medium">{questionNumber} of {numberOfQuestions}</div>
-          <Timer  questionNumber={questionNumber} onTimerEnd={handleTimerEnd}/>
+          <div className="text-[2rem] border-2 rounded-full h-[80px] w-[80px] border-blue-500  flex items-center justify-center">
+            <Timer  
+              questionNumber={questionNumber} 
+              onTimerEnd={handleTimerEnd}
+            />
+          </div>
         </div>
         <div>
           <h1 className="font-bold">SCORE 👍: <span>{score}</span></h1>
