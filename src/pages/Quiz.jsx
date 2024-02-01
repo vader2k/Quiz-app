@@ -82,7 +82,7 @@ const Quiz = () => {
     } else {
       setQuestion(quiz[questionNumber - 1]);
     }
-  }, [quiz, questionNumber, navigate, numberOfQuestions]);
+  }, [ questionNumber, navigate, numberOfQuestions]);
 
   
   return (
